@@ -77,9 +77,6 @@ freq(positivity$age_tri)
 
 
 ################################### Codebook ###################################
-install.packages(c("labelled", "sjlabelled"))
-library(labelled)
-
 # Create value labels list
 value_labels_1_5 <- c("strongly disagree" = 1, "disagree" = 2, "neither agree, nor disagree" = 3, "agree" = 4, "strongly agree" = 5)
 
@@ -99,11 +96,11 @@ positivity_labelled <- positivity %>%
     pos7 = "I feel I have many things to be proud of",
     pos8 = "I generally feel confident in myself",
     pos6 = "At times, the future seems unclear to me. (reverse scored)",
-    pos_old = "average score calculated in SPSS",       
-    new_age4 = "age of participants (continuous)",
-    pos6rev = "At times, the future seems unclear to me. (reversed from original)",
-    pos_new = "average score calculated in R using at least 50% of responses",
-    pos_new_manual = "average score calculated in R using SPSS method (listwise deletion)") %>% 
+#    pos_old = "average score calculated in SPSS",       
+    new_age4 = "age of participants (continuous)") %>% 
+#    pos6rev = "At times, the future seems unclear to me. (reversed from original)",
+#    pos_new = "average score calculated in R using at least 50% of responses",
+#    pos_new_manual = "average score calculated in R using SPSS method (listwise deletion)") %>% 
   set_value_labels(
     pos1 = value_labels_1_5,
     pos2 = value_labels_1_5,
@@ -116,10 +113,8 @@ positivity_labelled <- positivity %>%
     pos6 = value_labels_1_5)
 
 # Show the labelled dataset visually in the Viewer
-# Requires the 'sjPlot' package
-library(sjPlot)
 positivity_labelled %>% 
-  view_df(show.na = TRUE)
+  view_df(show.na = TRUE, show.prc = TRUE, show.frq = TRUE, max.len = 100, file = "codebook.html")
 
 ############################ Scale item frequencies ############################
 positivity %>% 
