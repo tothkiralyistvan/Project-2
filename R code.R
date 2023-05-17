@@ -14,8 +14,23 @@
 package_names <- c("haven", "here", "tidyverse", "sjmisc", "sjPlot", "labelled",
                    "psych", "summarytools", "MplusAutomation", "plyr", "openxlsx")
 
+# Custom function to install and load packages
+install_and_load_packages <- function(packages) {
+  for (package_name in packages) {
+    if (!requireNamespace(package_name, quietly = TRUE)) {
+      install.packages(package_name)
+      library(package_name, character.only = TRUE)
+    } else {
+      library(package_name, character.only = TRUE)
+    }
+  }
+}
+
+install_and_load_packages(package_names)
+
 # Read data
-positivity <- read_sav(here("data","positivity.sav"))
+positivity <- read_sav(here::here("data", "positivity.sav"))
+
 View(positivity)
 
 
