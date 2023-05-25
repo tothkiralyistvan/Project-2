@@ -1,14 +1,21 @@
 # Libraries
-library(haven)
-library(tidyverse)
-library(sjmisc)
-library(sjstats)
-library(psych)
-library(summarytools)
-library(MplusAutomation)
+# haven: data reading
+# here: data location reproducibility
+# tidyverse: data manipulation ('tidyr' or 'reshape2' could be used to reshape data)
+# sjmisc: data manipulation
+# sjPlot: codebook/data dictionary
+# labelled: codebook labeling
+# psych: descriptive statistics: 'describe()', alphas: 'alpha()', correlations: 'corr.test()' 
+# summarytools: descriptive statistics: 'desc()', frequencies: 'freq()'
+# MplusAutomation: plusAutomation
+# plyr: data manipulation for MplusAutomation?
+# openxlsx: to write results into Excel file
+
+package_names <- c("haven", "here", "tidyverse", "sjmisc", "sjPlot", "labelled",
+                   "psych", "summarytools", "MplusAutomation", "plyr", "openxlsx")
 
 # Read data
-positivity <- read_sav(here("location"))
+positivity <- read_sav(here("data","positivity.sav"))
 View(positivity)
 
 
