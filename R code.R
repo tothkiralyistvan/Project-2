@@ -8,10 +8,6 @@ library(psych)
 library(summarytools)
 library(skimr)
 
+# Read data
 positivity <- read_sav("data")
 View(positivity)
-
-# Explore data
-View(positivity)
-names(positivity)
-summary(positivity, digits = 4)
