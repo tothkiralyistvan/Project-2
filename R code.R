@@ -7,6 +7,8 @@ library(sjstats)
 library(psych)
 library(summarytools)
 library(skimr)
-library(haven)
-positivity <- read_sav("C:/Users/tothk/Dropbox/University/PSI/#projektek/$$ R adatok jatszani/positivity master régi_BB.sav")
+
+# Explore data
 View(positivity)
+names(positivity)
+summary(positivity, digits = 4)
