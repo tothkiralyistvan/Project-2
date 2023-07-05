@@ -48,3 +48,13 @@ positivity <- positivity %>%
 positivity %>% 
   select(pos1, pos2, pos3, pos4, pos5, pos6, pos7, pos8) %>% 
   freq()
+
+positivity <- positivity %>%
+  mutate(pos6rev = case_when(
+    pos6 == 1 ~ 5,
+    pos6 == 2 ~ 4,
+    pos6 == 3 ~ 3,
+    pos6 == 4 ~ 2,
+    pos6 == 5 ~ 1,
+    TRUE ~ NA_integer_  # Default value if none of the conditions match
+  ))
