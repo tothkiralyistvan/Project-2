@@ -41,3 +41,10 @@ positivity <- positivity %>%
   mutate(new_age4 = as.numeric(new_age4)) %>% 
   mutate(new_age4 = ifelse(new_age4 < 15 | new_age4 > 92, NA, new_age4))
 freq(positivity$new_age4)
+
+positivity <- positivity %>%
+  select(-age)
+
+positivity %>% 
+  select(pos1, pos2, pos3, pos4, pos5, pos6, pos7, pos8) %>% 
+  freq()
