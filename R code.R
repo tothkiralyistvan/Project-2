@@ -28,7 +28,7 @@ class(positivity$gender)
 positivity <- positivity %>% 
   mutate(gender = ifelse(gender > 2, NA, gender))
 
-# Age
+# Verify age
 freq(positivity$new_age)
 class(positivity$age)
 
@@ -42,13 +42,16 @@ positivity <- positivity %>%
   mutate(new_age4 = ifelse(new_age4 < 15 | new_age4 > 92, NA, new_age4))
 freq(positivity$new_age4)
 
+# Remove the "old" age variable as it's not useful anymore
 positivity <- positivity %>%
   select(-age)
 
+# Verify frequencies of items
 positivity %>% 
   select(pos1, pos2, pos3, pos4, pos5, pos6, pos7, pos8) %>% 
   freq()
 
+# Recode reverse coded item
 positivity <- positivity %>%
   mutate(pos6rev = case_when(
     pos6 == 1 ~ 5,
