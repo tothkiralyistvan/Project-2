@@ -46,6 +46,13 @@ freq(positivity$new_age4)
 positivity <- positivity %>%
   select(-age)
 
+# Clean last variable
+freq(positivity$age_tri)
+
+positivity <- positivity %>%
+  mutate(age_tri = ifelse(age_tri > 3, NA, age_tri))
+freq(positivity$age_tri)
+
 # Verify frequencies of items
 positivity %>% 
   select(pos1, pos2, pos3, pos4, pos5, pos6, pos7, pos8) %>% 
