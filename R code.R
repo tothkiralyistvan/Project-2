@@ -80,3 +80,11 @@ freq(positivity$pos_old)
 positivity <- positivity %>%
   mutate(pos_old = ifelse(pos_old > 5, NA, pos_old))
 freq(positivity$pos_old)
+
+# Create var list for averages and alphas
+list_posi <- c("pos1", "pos2", "pos3", "pos4", "pos5", "pos6rev", "pos7", "pos8")
+
+# Cronbach's alpha
+positivity %>% 
+  select(list_posi) %>% 
+  alpha()
