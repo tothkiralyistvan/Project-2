@@ -68,3 +68,15 @@ positivity <- positivity %>%
     pos6 == 5 ~ 1,
     TRUE ~ NA_integer_  # Default value if none of the conditions match
   ))
+
+# Rename average score created in SPSS
+positivity <- positivity %>%
+  rename(pos_old = positivity)
+
+# Verify
+freq(positivity$pos_old)
+
+# Recode outlier values to NAs
+positivity <- positivity %>%
+  mutate(pos_old = ifelse(pos_old > 5, NA, pos_old))
+freq(positivity$pos_old)
