@@ -46,7 +46,7 @@ freq(positivity$new_age4)
 positivity <- positivity %>%
   select(-age)
 
-# Clean last variable
+# Clean last variable with outlier issues
 freq(positivity$age_tri)
 
 positivity <- positivity %>%
