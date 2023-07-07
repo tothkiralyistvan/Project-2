@@ -88,3 +88,15 @@ list_posi <- c("pos1", "pos2", "pos3", "pos4", "pos5", "pos6rev", "pos7", "pos8"
 positivity %>% 
   select(list_posi) %>% 
   alpha()
+
+# Create new "averages" object in environment
+averages <- positivity %>%
+  transmute(pos_new = mean_n(select(., all_of(list_posi)), n = .5))
+
+# Create new variable and append to existing dataframe
+positivity <- positivity %>%
+  mutate(pos_new = mean_n(select(., all_of(list_posi)), n = .5))
+
+# Calculate variable manually (results in listwise deletion)
+positivity <- positivity %>% 
+  mutate(pos_new_manual = (pos1+pos2+pos3+pos4+pos5+pos6rev+pos7+pos8)/8)
