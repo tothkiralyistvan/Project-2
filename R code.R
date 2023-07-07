@@ -100,3 +100,13 @@ positivity <- positivity %>%
 # Calculate variable manually (results in listwise deletion)
 positivity <- positivity %>% 
   mutate(pos_new_manual = (pos1+pos2+pos3+pos4+pos5+pos6rev+pos7+pos8)/8)
+
+# Correlations
+positivity %>%
+  select(pos_new, pos_old, pos_new_manual) %>% 
+  corr.test()
+
+# Descriptives
+positivity %>% 
+  select(pos_new, pos_old, pos_new_manual) %>%
+  describe()
