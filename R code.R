@@ -1,0 +1,12 @@
+# Libraries
+library(haven)
+library(tidyverse)
+library(janitor)
+library(sjmisc)
+library(sjstats)
+library(psych)
+library(summarytools)
+library(skimr)
+library(haven)
+positivity <- read_sav("C:/Users/tothk/Dropbox/University/PSI/#projektek/$$ R adatok jatszani/positivity master régi_BB.sav")
+View(positivity)
