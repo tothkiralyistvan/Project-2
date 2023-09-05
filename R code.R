@@ -5,6 +5,7 @@ library(janitor)
 library(sjmisc)
 library(sjstats)
 library(psych)
+library(easystats)
 library(summarytools)
 library(skimr)
 
