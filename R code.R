@@ -16,7 +16,7 @@ View(positivity)
 # Explore data
 View(positivity)
 names(positivity)
-summary(positivity, digits = 4)
+summary(positivity)
 
 # Let's fix the miscoded variables one by one
 # Gender
