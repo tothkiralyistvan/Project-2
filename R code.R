@@ -13,27 +13,27 @@ library(skimr)
 positivity <- read_sav("data")
 View(positivity)
 
-# Explore data
+############## Data exploration ##############
 View(positivity)
 names(positivity)
 summary(positivity)
 
-# Let's fix the miscoded variables one by one
+############## Data cleaning ##############
 # Gender
 freq(positivity$gender)
 
-# Verify that gender is numerical
+## Verify that gender is numerical
 class(positivity$gender)
 
-# Recode 1 outlier to NA
+## Recode outlier value to NA
 positivity <- positivity %>% 
   mutate(gender = ifelse(gender > 2, NA, gender))
 
-# Verify age
+# Age (continuous)
 freq(positivity$new_age)
 class(positivity$age)
 
-# Recode empty cells, textual responses, change variable type, recode outliers
+## Recode textual responses, change variable type, recode outliers
 positivity <- positivity %>%
   mutate(new_age4 = age) %>% 
   mutate(new_age4 = case_when(
@@ -43,18 +43,18 @@ positivity <- positivity %>%
   mutate(new_age4 = ifelse(new_age4 < 15 | new_age4 > 92, NA, new_age4))
 freq(positivity$new_age4)
 
-# Remove the "old" age variable as it's not useful anymore
+## Remove the "old" age variable as it's not useful anymore
 positivity <- positivity %>%
   select(-age)
 
-# Clean last variable with outlier issues
+# Age (3 categories)
 freq(positivity$age_tri)
 
 positivity <- positivity %>%
   mutate(age_tri = ifelse(age_tri > 3, NA, age_tri))
 freq(positivity$age_tri)
 
-# Verify frequencies of items
+############## Scale item frequencies ##############
 positivity %>% 
   select(pos1, pos2, pos3, pos4, pos5, pos6, pos7, pos8) %>% 
   freq()
@@ -85,7 +85,7 @@ freq(positivity$pos_old)
 # Create var list for averages and alphas
 list_posi <- c("pos1", "pos2", "pos3", "pos4", "pos5", "pos6rev", "pos7", "pos8")
 
-# Cronbach's alpha
+############## Reliability: alpha ##############
 positivity %>% 
   select(list_posi) %>% 
   alpha()
@@ -102,12 +102,12 @@ positivity <- positivity %>%
 positivity <- positivity %>% 
   mutate(pos_new_manual = (pos1+pos2+pos3+pos4+pos5+pos6rev+pos7+pos8)/8)
 
-# Correlations
+############## Correlations ##############
 positivity %>%
   select(pos_new, pos_old, pos_new_manual) %>% 
   corr.test()
 
-# Descriptives
+############## Descriptives ##############
 positivity %>% 
   select(pos_new, pos_old, pos_new_manual) %>%
   describe()
