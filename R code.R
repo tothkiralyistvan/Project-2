@@ -30,7 +30,6 @@ positivity <- positivity %>%
   mutate(gender = ifelse(gender > 2, NA, gender))
 
 # Age (continuous)
-freq(positivity$new_age)
 class(positivity$age)
 
 ## Recode textual responses, change variable type, recode outliers
@@ -87,7 +86,7 @@ list_posi <- c("pos1", "pos2", "pos3", "pos4", "pos5", "pos6rev", "pos7", "pos8"
 
 ############## Reliability: alpha ##############
 positivity %>% 
-  select(list_posi) %>% 
+  select(all_of(list_posi)) %>% 
   alpha()
 
 # Create new "averages" object in environment
