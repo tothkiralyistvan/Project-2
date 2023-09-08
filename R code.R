@@ -9,14 +9,20 @@ library(easystats)
 library(summarytools)
 library(skimr)
 
+easystats::install_latest()
+
 # Read data
 positivity <- read_sav("data")
 View(positivity)
+
+
 
 ############## Data exploration ##############
 View(positivity)
 names(positivity)
 summary(positivity)
+
+
 
 ############## Data cleaning ##############
 # Gender
@@ -53,6 +59,7 @@ positivity <- positivity %>%
   mutate(age_tri = ifelse(age_tri > 3, NA, age_tri))
 freq(positivity$age_tri)
 
+
 ############## Scale item frequencies ##############
 positivity %>% 
   select(pos1, pos2, pos3, pos4, pos5, pos6, pos7, pos8) %>% 
@@ -84,6 +91,7 @@ freq(positivity$pos_old)
 # Create var list for averages and alphas
 list_posi <- c("pos1", "pos2", "pos3", "pos4", "pos5", "pos6rev", "pos7", "pos8")
 
+
 ############## Reliability: alpha ##############
 positivity %>% 
   select(all_of(list_posi)) %>% 
@@ -101,10 +109,23 @@ positivity <- positivity %>%
 positivity <- positivity %>% 
   mutate(pos_new_manual = (pos1+pos2+pos3+pos4+pos5+pos6rev+pos7+pos8)/8)
 
+
 ############## Correlations ##############
+# Usual method
 positivity %>%
   select(pos_new, pos_old, pos_new_manual) %>% 
   corr.test()
+
+# Newer 'correlation' package from the 'easystats' library
+results_corr <- positivity %>%
+  select(pos_old, pos_new, pos_new_manual) %>% 
+  correlation()
+
+# Print results in tidy format
+results_corr
+
+# Print results in correlation matrix
+summary(results_corr)
 
 ############## Descriptives ##############
 positivity %>% 
