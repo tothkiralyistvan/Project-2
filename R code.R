@@ -125,7 +125,4 @@ summary(results_corr)
 ################################# Descriptives #################################
 positivity %>% 
   select(pos_new, pos_old, pos_new_manual) %>%
-  describe()
-
-
-######################### Prep data for Mplus analyses #########################
+  descr()
