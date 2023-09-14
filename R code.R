@@ -5,19 +5,20 @@ library(sjmisc)
 library(sjstats)
 library(psych)
 library(summarytools)
+library(MplusAutomation)
 
 # Read data
 positivity <- read_sav("data")
 View(positivity)
 
 
-############## Data exploration ##############
+############################### Data exploration ###############################
 View(positivity)
 names(positivity)
 summary(positivity)
 
 
-############## Data cleaning ##############
+################################ Data cleaning #################################
 # Gender
 freq(positivity$gender)
 
@@ -53,7 +54,7 @@ positivity <- positivity %>%
 freq(positivity$age_tri)
 
 
-############## Scale item frequencies ##############
+############################ Scale item frequencies ############################
 positivity %>% 
   select(pos1, pos2, pos3, pos4, pos5, pos6, pos7, pos8) %>% 
   freq()
@@ -85,7 +86,7 @@ freq(positivity$pos_old)
 list_posi <- c("pos1", "pos2", "pos3", "pos4", "pos5", "pos6rev", "pos7", "pos8")
 
 
-############## Reliability: alpha ##############
+############################## Reliability: alpha ##############################
 positivity %>% 
   select(all_of(list_posi)) %>% 
   alpha()
@@ -103,7 +104,7 @@ positivity <- positivity %>%
   mutate(pos_new_manual = (pos1+pos2+pos3+pos4+pos5+pos6rev+pos7+pos8)/8)
 
 
-############## Correlations ##############
+################################# Correlations #################################
 # Usual method
 positivity %>%
   select(pos_new, pos_old, pos_new_manual) %>% 
@@ -121,8 +122,10 @@ results_corr
 summary(results_corr)
 
 
-
-############## Descriptives ##############
+################################# Descriptives #################################
 positivity %>% 
   select(pos_new, pos_old, pos_new_manual) %>%
   describe()
+
+
+######################### Prep data for Mplus analyses #########################
