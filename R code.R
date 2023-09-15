@@ -54,6 +54,11 @@ positivity <- positivity %>%
 freq(positivity$age_tri)
 
 
+################################### Codebook ###################################
+install.packages(c("labelled", "sjlabelled"))
+library(labelled)
+library(sjlabelled)
+
 ############################ Scale item frequencies ############################
 positivity %>% 
   select(pos1, pos2, pos3, pos4, pos5, pos6, pos7, pos8) %>% 
