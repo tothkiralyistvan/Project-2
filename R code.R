@@ -8,7 +8,7 @@ library(summarytools)
 library(MplusAutomation)
 
 # Read data
-positivity <- read_sav("data")
+positivity <- read_sav(here("location"))
 View(positivity)
 
 
@@ -58,6 +58,10 @@ freq(positivity$age_tri)
 install.packages(c("labelled", "sjlabelled"))
 library(labelled)
 library(sjlabelled)
+
+
+
+
 
 ############################ Scale item frequencies ############################
 positivity %>% 
@@ -111,20 +115,12 @@ positivity <- positivity %>%
 
 ################################# Correlations #################################
 # Usual method
-positivity %>%
+results_corr <- positivity %>%
   select(pos_new, pos_old, pos_new_manual) %>% 
   corr.test()
 
-# Newer 'correlation' package from the 'easystats' library
-results_corr <- positivity %>%
-  select(pos_old, pos_new, pos_new_manual) %>% 
-  correlation()
-
 # Print results in tidy format
 results_corr
-
-# Print results in correlation matrix
-summary(results_corr)
 
 
 ################################# Descriptives #################################
