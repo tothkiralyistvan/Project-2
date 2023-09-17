@@ -59,9 +59,48 @@ install.packages(c("labelled", "sjlabelled"))
 library(labelled)
 library(sjlabelled)
 
+# Create value labels list
+value_labels_1_5 <- c("strongly disagree" = 1, "strongly agree" = 5)
 
+# Assign variable labels
+positivity_labelled <- positivity %>% 
+  set_variable_labels(
+    adatfile = "source of data",
+    gender = "gender of participant",
+    age_tri = "age of participants (categorical)",
+    age_tri2 = "age of participants (categorical)",
+    pos1 = "I have great faith in the future",
+    pos2 = "I am satisfied with my life", 
+    pos3 = "Others are generally here for me when I need them",    
+    pos4 = "I look forward to the future with hope and enthusiasm", 
+    pos5 = "On the whole, I am satisfied with myself", 
+    pos6r = "At times, the future seems unclear to me. (reversed from original)", 
+    pos7 = "I feel I have many things to be proud of",
+    pos8 = "I generally feel confident in myself",
+    pos6 = "At times, the future seems unclear to me. (reverse scored)",
+    pos_old = "average score calculated in SPSS",       
+    new_age4 = "age of participants (continuous)",
+    pos6rev = "At times, the future seems unclear to me. (reversed from original)",
+    pos_new = "average score calculated in R using at least 50% of responses",
+    pos_new_manual = "average score calculated in R using SPSS method (listwise deletion)") %>% 
+  set_value_labels(
+    pos1 = value_labels_1_5,
+    pos2 = value_labels_1_5,
+    pos3 = value_labels_1_5,
+    pos4 = value_labels_1_5,
+    pos5 = value_labels_1_5,
+    pos6r = value_labels_1_5,  # reversed item  
+    pos7 = value_labels_1_5,
+    pos8 = value_labels_1_5,
+    pos6 = value_labels_1_5)
 
+# Once everything is done, create dictionary object
+dictionary <- generate_dictionary(positivity_labelled)
+rm(positivity_labelled)
 
+dictionary %>% 
+  filter(variable %in% "pos1") %>% 
+  select(variable, label, value_labels)
 
 ############################ Scale item frequencies ############################
 positivity %>% 
