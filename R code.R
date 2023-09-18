@@ -57,10 +57,9 @@ freq(positivity$age_tri)
 ################################### Codebook ###################################
 install.packages(c("labelled", "sjlabelled"))
 library(labelled)
-library(sjlabelled)
 
 # Create value labels list
-value_labels_1_5 <- c("strongly disagree" = 1, "strongly agree" = 5)
+value_labels_1_5 <- c("strongly disagree" = 1, "disagree" = 2, "neither agree, nor disagree" = 3, "agree" = 4, "strongly agree" = 5)
 
 # Assign variable labels
 positivity_labelled <- positivity %>% 
@@ -98,9 +97,10 @@ positivity_labelled <- positivity %>%
 dictionary <- generate_dictionary(positivity_labelled)
 rm(positivity_labelled)
 
-dictionary %>% 
-  filter(variable %in% "pos1") %>% 
-  select(variable, label, value_labels)
+# Show the labelled dataset visually in the Viewer
+# Requires the 'sjPlot' package
+positivity_labelled %>% 
+  view_df()
 
 ############################ Scale item frequencies ############################
 positivity %>% 
