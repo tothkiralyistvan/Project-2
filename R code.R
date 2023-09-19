@@ -99,8 +99,9 @@ rm(positivity_labelled)
 
 # Show the labelled dataset visually in the Viewer
 # Requires the 'sjPlot' package
+library(sjPlot)
 positivity_labelled %>% 
-  view_df()
+  view_df(show.na = TRUE)
 
 ############################ Scale item frequencies ############################
 positivity %>% 
