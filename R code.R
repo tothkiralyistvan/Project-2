@@ -93,10 +93,6 @@ positivity_labelled <- positivity %>%
     pos8 = value_labels_1_5,
     pos6 = value_labels_1_5)
 
-# Once everything is done, create dictionary object
-dictionary <- generate_dictionary(positivity_labelled)
-rm(positivity_labelled)
-
 # Show the labelled dataset visually in the Viewer
 # Requires the 'sjPlot' package
 library(sjPlot)
