@@ -8,7 +8,7 @@ library(psych)
 library(summarytools)
 library(skimr)
 
-# modification to see if commiting works as intended or not
+# 
 
 # Read data
 positivity <- read_sav("data")
