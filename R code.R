@@ -1,27 +1,20 @@
 # Libraries
 library(haven)
 library(tidyverse)
-library(janitor)
 library(sjmisc)
 library(sjstats)
 library(psych)
-library(easystats)
 library(summarytools)
-library(skimr)
-
-easystats::install_latest()
 
 # Read data
 positivity <- read_sav("data")
 View(positivity)
 
 
-
 ############## Data exploration ##############
 View(positivity)
 names(positivity)
 summary(positivity)
-
 
 
 ############## Data cleaning ##############
@@ -126,6 +119,8 @@ results_corr
 
 # Print results in correlation matrix
 summary(results_corr)
+
+
 
 ############## Descriptives ##############
 positivity %>% 
